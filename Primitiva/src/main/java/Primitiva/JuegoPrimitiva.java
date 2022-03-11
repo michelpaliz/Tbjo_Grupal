@@ -1,13 +1,14 @@
 package Primitiva;
 
 //*IMPORTS LIBRERIAS
-import util.Lib;
+//import util.Lib;
 
 //*IMPORTS PARA OPERACIONES
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 import java.util.Set;
 import java.util.LinkedHashSet;
-import java.util.Random;
 
 public class JuegoPrimitiva {
     // Variables Globales
@@ -20,6 +21,10 @@ public class JuegoPrimitiva {
     static int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
     int userInt;
     boolean correct;
+    //cuantas vez ha ganado en cada categoria
+    int cateEspe, cateUno, cateDos, cateTres, cateQuat, cateCinco;
+    //numero, complementario
+    int complementario;
     int primerNumero, segundoNumero, tercerNumero, cuartoNumero, quintoNumero, sextoNumero;
     // +Todo variable para contar los numeros de intentos
 
@@ -125,8 +130,45 @@ public class JuegoPrimitiva {
         return numeros;
     }
 
-    public JuegoPrimitiva() {
+    private void comprobarCategoria(){
+        int[]contArrayNum = new int[48];
+        int numComprop = 0;
+        for(int i = 0; i < numeros.length; i++){
+            numComprop=numeros[i];
+            numComprop--;
+            contArrayNum[numComprop]++;
+        }
+        if(complementario!=0){
+            int posNum = complementario-1;
+            contArrayNum[posNum]++;
+        }
 
+        int numCat =0;
+        for(int j = 0; j< contArrayNum.length;j++){
+            switch (contArrayNum[j]){
+                case 3:
+                    cateCinco++;
+                    numCat = contArrayNum[j];
+                    break;
+                case 4:
+                    cateQuat++;
+                    numCat = contArrayNum[j];
+                    break;
+                case 5:
+                    cateTres++;
+                    numCat = contArrayNum[j];
+                    break;
+                case 6:
+                    cateUno++;
+                    numCat = contArrayNum[j];
+                    break;
+                default:
+            }
+        }
+        System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+    }
+
+    public JuegoPrimitiva() {
         menu();
     }
 
