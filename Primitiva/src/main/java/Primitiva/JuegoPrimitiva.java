@@ -91,6 +91,8 @@ public class JuegoPrimitiva {
         int reintegro = r.nextInt(Config.MAX_RND-Config.MIN_RND+1)+Config.MIN_RND;
         numerosComputer.setNumReintegro(reintegro);
 
+        System.out.println(numerosComputer.toString());
+        System.out.println(numerosUser.toString());
         switch (userInt) {
             case 1:
                 juegoUnico();
@@ -103,6 +105,7 @@ public class JuegoPrimitiva {
                 numerosUser.setNumReintegro(0);
                 break;
             case 4:
+                sorteo1000();
                 break;
 
             case 5:
@@ -173,9 +176,13 @@ public class JuegoPrimitiva {
         for(int i = 0; i<Config.MAX_NUMERO_SUERTE; i++){
             if(numerosUser.getNumerosElegidos()[i]== numerosComputer.getNumerosElegidos()[i]){
                 cont++;
+                System.out.println("hola");
             }
         }
         switch (cont){
+            case 1:
+                System.out.println("PREMIO");
+                break;
             case 3:
                 cateCinco++;
                 System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 5");
@@ -202,7 +209,7 @@ public class JuegoPrimitiva {
                 cateUno++;
                 System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 1");
                 return true;
-            default:
+            case 0:
                 System.out.println("no has ganado en ninguna categoria, suente en la siguiente partida!");
         }
         return false;
@@ -237,6 +244,12 @@ public class JuegoPrimitiva {
             comprobarCategoria();
         }
         System.out.println("Has ganado la categoria 5:"+cateCinco+" veces");
+        System.out.println("Has ganado la categoria 4:"+cateQuat+" veces");
+        System.out.println("Has ganado la categoria 3:"+cateTres+" veces");
+        System.out.println("Has ganado la categoria 2:"+cateDos+" veces");
+        System.out.println("Has ganado la categoria 1:"+cateUno+" veces");
+        System.out.println("Has ganado la categoria ESPECIAL:"+cateEspe+" veces");
+
     }
 
 
