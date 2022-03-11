@@ -4,6 +4,8 @@ package Primitiva;
 //import util.Lib;
 
 //*IMPORTS PARA OPERACIONES
+import Primitiva.config.Config;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
@@ -50,7 +52,7 @@ public class JuegoPrimitiva {
                 break;
             case 2:
                 System.out.println("El sistema generara 6 numero automaticamente para ti");
-                numerosElegidos = new Primitiva(generatorRandom());
+                /*numerosElegidos = new Primitiva(generatorRandom());*/
                 System.out.println(numerosElegidos);
                 break;
         }
@@ -182,7 +184,7 @@ public class JuegoPrimitiva {
     private void jugarHastaPremioSR(){
         boolean ganado = false;
         do{
-            numerosElegidos = new Primitiva(generatorRandom());
+            /*numerosElegidos = new Primitiva(generatorRandom());*/
             ganado = comprobarCategoria();
         }while (!ganado);
     }
