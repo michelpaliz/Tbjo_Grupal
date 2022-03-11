@@ -96,9 +96,11 @@ public class JuegoPrimitiva {
                 juegoUnico();
                 break;
             case 2:
+                jugarHastaPremio();
                 break;
             case 3:
                 jugarHastaPremioSR();
+                numerosUser.setNumReintegro(0);
                 break;
             case 4:
                 break;
@@ -206,13 +208,6 @@ public class JuegoPrimitiva {
         return false;
     }
 
-    private void jugarHastaPremioSR(){
-        boolean ganado = false;
-        do{
-            ganado = comprobarCategoria();
-        }while (!ganado);
-    }
-
     public JuegoPrimitiva() {
         menu();
         subMenu();
@@ -222,5 +217,27 @@ public class JuegoPrimitiva {
         comprobarCategoria();
         System.out.println(numerosComputer.toString());
     }
+
+    private void jugarHastaPremio(){
+        boolean ganado = false;
+        do{
+            ganado = comprobarCategoria();
+        }while (!ganado);
+    }
+
+    private void jugarHastaPremioSR(){
+        boolean ganado = false;
+        do{
+            ganado = comprobarCategoria();
+        }while (!ganado);
+    }
+
+    private void sorteo1000() {
+        for(int i = 0; i < Config.SORTEO1000;i++) {
+            comprobarCategoria();
+        }
+        System.out.println("Has ganado la categoria 5:"+cateCinco+" veces");
+    }
+
 
 }
