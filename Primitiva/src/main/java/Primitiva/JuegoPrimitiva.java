@@ -80,20 +80,26 @@ public class JuegoPrimitiva {
             subMenu.append("0.Para Salir\n");
             System.out.println(subMenu.toString());
             userInt = Integer.parseInt(myInput.nextLine());
-            correct = userInt >= 0 && userInt >= 5;
+            correct = userInt >= 0 && userInt <= 5;
 
         } while (!correct);
 
         switch (userInt) {
             case 1:
-
+                juegoUnico();
+                break;
             case 2:
-
+                break;
             case 3:
                 jugarHastaPremioSR();
+                break;
             case 4:
+                break;
 
             case 5:
+                break;
+            case 0:
+                System.out.println("Adios");
         }
     }
 
@@ -147,7 +153,7 @@ public class JuegoPrimitiva {
 
     private boolean comprobarCategoria(){
         int cont =0;
-        for(int i = 0; i<numerosUser.getNumerosElegidos().length; i++){
+        for(int i = 0; i<Config.MAX_NUMERO_SUERTE; i++){
             if(numerosUser.getNumerosElegidos()[i]== numerosComputer.getNumerosElegidos()[i]){
                 cont++;
             }
@@ -155,27 +161,29 @@ public class JuegoPrimitiva {
         switch (cont){
             case 3:
                 cateCinco++;
-                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 5");
                 return true;
             case 4:
                 cateQuat++;
-                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 4");
                 return true;
             case 5:
                 if(numerosUser.getNumeroComp() == numerosComputer.getNumeroComp()){
+                    System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 2");
                     cateDos++;
                     return true;
                 }
                 cateTres++;
-                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 3");
                 return true;
             case 6:
                 if(numerosUser.getNumReintegro() == numerosComputer.getNumReintegro()){
+                    System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria ESPECIAL");
                     cateEspe++;
                     return true;
                 }
                 cateUno++;
-                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 1");
                 return true;
             default:
                 System.out.println("no has ganado en ninguna categoria, suente en la siguiente partida!");
@@ -193,6 +201,11 @@ public class JuegoPrimitiva {
     public JuegoPrimitiva() {
         menu();
         subMenu();
+    }
+
+    private void juegoUnico() {
+        comprobarCategoria();
+        System.out.println(numerosComputer.toString());
     }
 
 }
