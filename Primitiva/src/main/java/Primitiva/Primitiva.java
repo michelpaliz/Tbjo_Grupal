@@ -26,7 +26,17 @@ public class Primitiva {
         this.numerosElegidos = validarNumeros;
     }
 
+    public void setNumerosElegidos(int[] numerosElegidos) {
+        this.numerosElegidos = numerosElegidos;
+    }
 
+    public void setNumReintegro(int numReintegro) {
+        this.numReintegro = numReintegro;
+    }
+
+    public void setNumeroComp(int numeroComp) {
+        this.numeroComp = numeroComp;
+    }
 
     public int[] getNumerosElegidos() {
         return numerosElegidos;

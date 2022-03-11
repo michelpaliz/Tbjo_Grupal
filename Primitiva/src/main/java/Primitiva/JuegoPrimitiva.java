@@ -4,6 +4,7 @@ package Primitiva;
 //import util.Lib;
 
 //*IMPORTS PARA OPERACIONES
+import Primitiva.config.Bombo;
 import Primitiva.config.Config;
 
 import java.util.Arrays;
@@ -14,18 +15,21 @@ import java.util.LinkedHashSet;
 
 public class JuegoPrimitiva {
     // Variables Globales
-    // Variable de la clase primitiva
-    Primitiva numerosElegidos;
     // Scanner & Random
     Scanner myInput = new Scanner(System.in);
     Random r = new Random();
+
+    //Bombo de 49 Numeros
+    Bombo bombo49 = new Bombo(49,1);
+
     //Para los numeros del usuario y del sistema
-    Primitiva usePrimitiva = new Primitiva();
-    Primitiva computerPrimitiva = new Primitiva();
+    Primitiva numerosUser = new Primitiva();
+    Primitiva numerosComputer = new Primitiva();
+
     // Para uso de Operaciones
-    static int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
     int userInt;
     boolean correct;
+
     //cuantas vez ha ganado en cada categoria
     int cateEspe, cateUno, cateDos, cateTres, cateQuat, cateCinco;
 
@@ -43,17 +47,20 @@ public class JuegoPrimitiva {
             correct = userInt > 0 && userInt <= 2;
 
         } while (!correct);
-
+        int reintegro = r.nextInt(Config.MAX_RND-Config.MIN_RND+1)+Config.MIN_RND;
+        numerosUser.setNumReintegro(reintegro);
+        int comple = bombo49.extraerBola();
+        numerosUser.setNumeroComp(comple);
         switch (userInt) {
             case 1:
                 System.out.println("Seleccion de numeros");
-                numerosElegidos = new Primitiva(validarNumeros());
-                System.out.println(numerosElegidos);
+                numerosUser.setNumerosElegidos(validarNumeros());
+                System.out.println(numerosUser);
                 break;
             case 2:
                 System.out.println("El sistema generara 6 numero automaticamente para ti");
-                /*numerosElegidos = new Primitiva(generatorRandom());*/
-                System.out.println(numerosElegidos);
+                numerosUser.setNumerosElegidos(generatorRandom());
+                System.out.println(numerosUser);
                 break;
         }
 
@@ -96,13 +103,12 @@ public class JuegoPrimitiva {
      *         it does not allow duplicate elements.
      */
 
-    public Set<Integer> generatorRandom() {
-        Set<Integer> set = new LinkedHashSet<Integer>();
-        while (set.size() < Config.MAX_NUMERO_SUERTE) {
-            set.add(r.nextInt(49) + 1);
+    public int[] generatorRandom() {
+        int[] arr = new int[Config.MAX_NUMERO_SUERTE];
+        for(int i = 0; i<arr.length;i++ ){
+            arr[i] = bombo49.extraerBola();
         }
-        // System.out.println("Random numbers with no duplicates = " + set);
-        return set;
+        return arr;
     }
 
     /**
@@ -111,6 +117,7 @@ public class JuegoPrimitiva {
      */
 
     public int[] validarNumeros() {
+        int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
         for (int i = 0; i < Config.MAX_NUMERO_SUERTE; i++) {
             do {
                 correct = true;
@@ -139,52 +146,38 @@ public class JuegoPrimitiva {
     }
 
     private boolean comprobarCategoria(){
-        int[]contArrayNum = new int[48];
-        int numComprop = 0;
-        for(int i = 0; i < numerosElegidos.getNumerosElegidos().length; i++){
-            numComprop=numerosElegidos.getNumerosElegidos()[i];
-            numComprop--;
-            contArrayNum[numComprop]++;
-        }
-        int complementario = numerosElegidos.getNumeroComp();
-        if(complementario!=0){
-            int posNum = complementario-1;
-            contArrayNum[posNum]++;
-        }
-
-        int numCat =0;
-        for(int j = 0; j< contArrayNum.length;j++){
-            switch (contArrayNum[j]){
-                case 3:
-                    cateCinco++;
-                    numCat = contArrayNum[j];
-                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
-                    return true;
-                case 4:
-                    cateQuat++;
-                    numCat = contArrayNum[j];
-                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
-                    return true;
-                case 5:
-                    cateTres++;
-                    numCat = contArrayNum[j];
-                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
-                    return true;
-                case 6:
-                    cateUno++;
-                    numCat = contArrayNum[j];
-                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
-                    return true;
+        int cont =0;
+        for(int i = 0; i<numerosUser.getNumerosElegidos().length; i++){
+            if(numerosUser.getNumerosElegidos()[i]== numerosComputer.getNumerosElegidos()[i]){
+                cont++;
             }
         }
-        System.out.println("no has ganado en ninguna categoria, suente en la siguiente partida!");
+        switch (cont){
+            case 3:
+                cateCinco++;
+                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                return true;
+            case 4:
+                cateQuat++;
+                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                return true;
+            case 5:
+                cateTres++;
+                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                return true;
+            case 6:
+                cateUno++;
+                System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
+                return true;
+            default:
+                System.out.println("no has ganado en ninguna categoria, suente en la siguiente partida!");
+        }
         return false;
     }
 
     private void jugarHastaPremioSR(){
         boolean ganado = false;
         do{
-            /*numerosElegidos = new Primitiva(generatorRandom());*/
             ganado = comprobarCategoria();
         }while (!ganado);
     }
