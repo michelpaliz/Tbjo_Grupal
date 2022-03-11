@@ -23,8 +23,7 @@ public class JuegoPrimitiva {
     boolean correct;
     //cuantas vez ha ganado en cada categoria
     int cateEspe, cateUno, cateDos, cateTres, cateQuat, cateCinco;
-    //numero, complementario
-    int complementario;
+
     int primerNumero, segundoNumero, tercerNumero, cuartoNumero, quintoNumero, sextoNumero;
     // +Todo variable para contar los numeros de intentos
 
@@ -71,11 +70,11 @@ public class JuegoPrimitiva {
 
         switch (userInt) {
             case 1:
-                System.out.println("");
+
             case 2:
 
             case 3:
-
+                jugarHastaPremioSR();
             case 4:
 
             case 5:
@@ -130,14 +129,15 @@ public class JuegoPrimitiva {
         return numeros;
     }
 
-    private void comprobarCategoria(){
+    private boolean comprobarCategoria(){
         int[]contArrayNum = new int[48];
         int numComprop = 0;
-        for(int i = 0; i < numeros.length; i++){
-            numComprop=numeros[i];
+        for(int i = 0; i < numerosElegidos.getNumerosElegidos().length; i++){
+            numComprop=numerosElegidos.getNumerosElegidos()[i];
             numComprop--;
             contArrayNum[numComprop]++;
         }
+        int complementario = numerosElegidos.getNumeroComp();
         if(complementario!=0){
             int posNum = complementario-1;
             contArrayNum[posNum]++;
@@ -149,27 +149,40 @@ public class JuegoPrimitiva {
                 case 3:
                     cateCinco++;
                     numCat = contArrayNum[j];
-                    break;
+                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+                    return true;
                 case 4:
                     cateQuat++;
                     numCat = contArrayNum[j];
-                    break;
+                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+                    return true;
                 case 5:
                     cateTres++;
                     numCat = contArrayNum[j];
-                    break;
+                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+                    return true;
                 case 6:
                     cateUno++;
                     numCat = contArrayNum[j];
-                    break;
-                default:
+                    System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+                    return true;
             }
         }
-        System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
+        System.out.println("no has ganado en ninguna categoria, suente en la siguiente partida!");
+        return false;
+    }
+
+    private void jugarHastaPremioSR(){
+        boolean ganado = false;
+        do{
+            numerosElegidos = new Primitiva(generatorRandom());
+            ganado = comprobarCategoria();
+        }while (!ganado);
     }
 
     public JuegoPrimitiva() {
         menu();
+        subMenu();
     }
 
 }

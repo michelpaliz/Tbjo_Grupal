@@ -8,8 +8,8 @@ public class Primitiva {
     private int[] numerosElegidos;
     private String modalidadJuego;
     // +Todo generar los tipos de datos para estos dos arrays
-    private int[] numReintegro;
-    private int[] numeroComp;
+    private int numReintegro;
+    private int numeroComp;
 
     // Generacion de constructores
     public Primitiva(int[] numerosElegidos, String modalidadJuego) {
@@ -27,6 +27,22 @@ public class Primitiva {
         for (Integer i : generatorRandom) {
             this.numerosElegidos[j++] = i;
         }
+    }
+
+    public int[] getNumerosElegidos() {
+        return numerosElegidos;
+    }
+
+    public String getModalidadJuego() {
+        return modalidadJuego;
+    }
+
+    public int getNumReintegro() {
+        return numReintegro;
+    }
+
+    public int getNumeroComp() {
+        return numeroComp;
     }
 
     @Override
