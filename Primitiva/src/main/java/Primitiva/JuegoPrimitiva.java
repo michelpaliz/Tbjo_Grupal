@@ -162,10 +162,18 @@ public class JuegoPrimitiva {
                 System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
                 return true;
             case 5:
+                if(numerosUser.getNumeroComp() == numerosComputer.getNumeroComp()){
+                    cateDos++;
+                    return true;
+                }
                 cateTres++;
                 System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
                 return true;
             case 6:
+                if(numerosUser.getNumReintegro() == numerosComputer.getNumReintegro()){
+                    cateEspe++;
+                    return true;
+                }
                 cateUno++;
                 System.out.println("has optenido: " + cont + " numeros igual, has ganado un premio de categoria "+ cont);
                 return true;
