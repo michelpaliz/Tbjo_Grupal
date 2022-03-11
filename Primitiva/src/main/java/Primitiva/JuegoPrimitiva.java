@@ -21,6 +21,7 @@ public class JuegoPrimitiva {
 
     //Bombo de 49 Numeros
     Bombo bombo49 = new Bombo(49,1);
+    Bombo bomboComputer = new Bombo(49,1);
 
     //Para los numeros del usuario y del sistema
     Primitiva numerosUser = new Primitiva();
@@ -84,6 +85,12 @@ public class JuegoPrimitiva {
 
         } while (!correct);
 
+        numerosComputer.setNumerosElegidos(generarRandomComputer());
+        int comple = bomboComputer.extraerBola();
+        numerosComputer.setNumeroComp(comple);
+        int reintegro = r.nextInt(Config.MAX_RND-Config.MIN_RND+1)+Config.MIN_RND;
+        numerosComputer.setNumReintegro(reintegro);
+
         switch (userInt) {
             case 1:
                 juegoUnico();
@@ -113,6 +120,14 @@ public class JuegoPrimitiva {
         int[] arr = new int[Config.MAX_NUMERO_SUERTE];
         for(int i = 0; i<arr.length;i++ ){
             arr[i] = bombo49.extraerBola();
+        }
+        return arr;
+    }
+
+    private int[] generarRandomComputer(){
+        int[] arr = new int[Config.MAX_NUMERO_SUERTE];
+        for(int i = 0; i<arr.length;i++ ){
+            arr[i] = bomboComputer.extraerBola();
         }
         return arr;
     }
