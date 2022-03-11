@@ -57,14 +57,18 @@ public class JuegoPrimitiva {
     public void subMenu() {
 
         do {
-            System.out.println("****ELIGE UNA MODALIDAD DE JUEGO *****");
-            System.out.println("1. Juego Unico");
-            System.out.println("2.Jugar hasta obtener un premio(con reintegro)");
-            System.out.println("3.Jugar hasta obtener un premio (Sin reintegro)");
-            System.out.println("4.Ciclo de 1000 sorteos");
-            System.out.println("5.Jugar hasta obtener premio categoria especial");
+            StringBuilder subMenu = new StringBuilder();
+            subMenu.append("****ELIGE UNA MODALIDAD DE JUEGO *****\n");
+            subMenu.append("1. Juego Unico\n");
+            subMenu.append("2.Jugar hasta obtener un premio(con reintegro)\n");
+            subMenu.append("3.Jugar hasta obtener un premio (Sin reintegro)\n");
+            subMenu.append("4.Ciclo de 10000 sorteos\n");
+            subMenu.append("5.Jugar hasta obtener premio categoria especial\n");
+            subMenu.append("************************************\n");
+            subMenu.append("0.Para Salir\n");
+            System.out.println(subMenu.toString());
             userInt = Integer.parseInt(myInput.nextLine());
-            correct = userInt > 0 && userInt >= 5;
+            correct = userInt >= 0 && userInt >= 5;
 
         } while (!correct);
 
