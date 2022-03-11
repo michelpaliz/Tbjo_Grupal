@@ -17,6 +17,9 @@ public class JuegoPrimitiva {
     // Scanner & Random
     Scanner myInput = new Scanner(System.in);
     Random r = new Random();
+    //Para los numeros del usuario y del sistema
+    Primitiva usePrimitiva = new Primitiva();
+    Primitiva computerPrimitiva = new Primitiva();
     // Para uso de Operaciones
     static int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
     int userInt;
