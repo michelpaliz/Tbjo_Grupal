@@ -54,8 +54,8 @@ public class Primitiva {
     public String toString() {
         return "Primitiva{" +
                 "numerosElegidos=" + Arrays.toString(numerosElegidos) +
-                ", modalidadJuego='" + '\'' +
+                ", numReintegro=" + numReintegro +
+                ", numeroComp=" + numeroComp +
                 '}';
     }
-
 }

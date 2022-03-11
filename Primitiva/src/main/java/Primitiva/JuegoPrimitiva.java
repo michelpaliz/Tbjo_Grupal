@@ -91,8 +91,6 @@ public class JuegoPrimitiva {
         int reintegro = r.nextInt(Config.MAX_RND-Config.MIN_RND+1)+Config.MIN_RND;
         numerosComputer.setNumReintegro(reintegro);
 
-        System.out.println(numerosComputer.toString());
-        System.out.println(numerosUser.toString());
         switch (userInt) {
             case 1:
                 juegoUnico();
@@ -107,7 +105,6 @@ public class JuegoPrimitiva {
             case 4:
                 sorteo1000();
                 break;
-
             case 5:
                 break;
             case 0:
@@ -172,17 +169,16 @@ public class JuegoPrimitiva {
     }
 
     private boolean comprobarCategoria(){
-        int cont =0;
+        int cont = 0;
         for(int i = 0; i<Config.MAX_NUMERO_SUERTE; i++){
-            if(numerosUser.getNumerosElegidos()[i]== numerosComputer.getNumerosElegidos()[i]){
-                cont++;
-                System.out.println("hola");
+            for(int j = 0; j <Config.MAX_NUMERO_SUERTE; j++){
+                if(numerosUser.getNumerosElegidos()[i]==numerosComputer.getNumerosElegidos()[j]){
+                    cont++;
+                }
             }
         }
+
         switch (cont){
-            case 1:
-                System.out.println("PREMIO");
-                break;
             case 3:
                 cateCinco++;
                 System.out.println("Tienes : " + cont + " letras igueles, has ganado un premio de categoria 5");
@@ -228,20 +224,26 @@ public class JuegoPrimitiva {
     private void jugarHastaPremio(){
         boolean ganado = false;
         do{
+            numerosComputer.setNumerosElegidos(generarRandomComputer());
             ganado = comprobarCategoria();
+            bomboComputer.reset();
         }while (!ganado);
     }
 
     private void jugarHastaPremioSR(){
         boolean ganado = false;
         do{
+            numerosComputer.setNumerosElegidos(generarRandomComputer());
             ganado = comprobarCategoria();
+            bomboComputer.reset();
         }while (!ganado);
     }
 
     private void sorteo1000() {
         for(int i = 0; i < Config.SORTEO1000;i++) {
+            numerosComputer.setNumerosElegidos(generarRandomComputer());
             comprobarCategoria();
+            bomboComputer.reset();
         }
         System.out.println("Has ganado la categoria 5:"+cateCinco+" veces");
         System.out.println("Has ganado la categoria 4:"+cateQuat+" veces");
