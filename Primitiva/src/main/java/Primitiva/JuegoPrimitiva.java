@@ -4,7 +4,8 @@ package Primitiva;
 //import util.Lib;
 
 //*IMPORTS PARA OPERACIONES
-import java.util.Arrays;
+import Primitiva.config.Config;
+
 import java.util.Scanner;
 import java.util.Random;
 import java.util.Set;
@@ -140,9 +141,9 @@ public class JuegoPrimitiva {
         int[]contArrayNum = new int[48];
         int numComprop = 0;
         for(int i = 0; i < numerosElegidos.getNumerosElegidos().length; i++){
-            numComprop=numerosElegidos.getNumerosElegidos()[i];
-            numComprop--;
-            contArrayNum[numComprop]++;
+            if(userPrimitiva) {
+
+            }
         }
         int complementario = numerosElegidos.getNumeroComp();
         if(complementario!=0){
@@ -164,11 +165,20 @@ public class JuegoPrimitiva {
                     System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
                     return true;
                 case 5:
+                    if(/*comprobar si es tambien tiene el numero complementario*/){
+                        cateDos++;
+                        System.out.println("has ganado la categoria 2: 5 letras + reintegro" );
+                        return true;
+                    }
                     cateTres++;
-                    numCat = contArrayNum[j];
                     System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
                     return true;
                 case 6:
+                    if(/*comprobar si es tambien tiene el numero complementario*/){
+                        cateEspe++;
+                        System.out.println("has ganado la categoria 6: 6 letras + complementario" );
+                        return true;
+                    }
                     cateUno++;
                     numCat = contArrayNum[j];
                     System.out.println("has optenido: " + numCat + " numeros igual, has ganado un premio de categoria "+ numCat);
