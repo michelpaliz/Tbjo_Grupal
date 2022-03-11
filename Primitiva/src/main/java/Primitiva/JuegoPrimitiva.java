@@ -4,7 +4,6 @@ package Primitiva;
 //import util.Lib;
 
 //*IMPORTS PARA OPERACIONES
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.Set;
@@ -13,15 +12,13 @@ import java.util.LinkedHashSet;
 public class JuegoPrimitiva {
     // Variables Globales
     // Variable de la clase primitiva
-    Primitiva numerosElegidos;
+    Primitiva numerosElegidosUser = new Primitiva();
+    Primitiva computerPrimitiva = new Primitiva();
     // Scanner & Random
     Scanner myInput = new Scanner(System.in);
     Random r = new Random();
-    //Para los numeros del usuario y del sistema
-    Primitiva usePrimitiva = new Primitiva();
-    Primitiva computerPrimitiva = new Primitiva();
     // Para uso de Operaciones
-    static int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
+
     int userInt;
     boolean correct;
     //cuantas vez ha ganado en cada categoria
@@ -45,13 +42,14 @@ public class JuegoPrimitiva {
         switch (userInt) {
             case 1:
                 System.out.println("Seleccion de numeros");
-                numerosElegidos = new Primitiva(validarNumeros());
-                System.out.println(numerosElegidos);
+                numerosElegidosUser = new Primitiva(validarNumeros());
+                System.out.println(numerosElegidosUser);
                 break;
             case 2:
                 System.out.println("El sistema generara 6 numero automaticamente para ti");
-                numerosElegidos = new Primitiva(generatorRandom());
-                System.out.println(numerosElegidos);
+                numerosElegidosUser = new Primitiva();
+                numerosElegidosUser = generatorRandom();
+                System.out.println(numerosElegidosUser);
                 break;
         }
 
@@ -94,13 +92,8 @@ public class JuegoPrimitiva {
      *         it does not allow duplicate elements.
      */
 
-    public Set<Integer> generatorRandom() {
-        Set<Integer> set = new LinkedHashSet<Integer>();
-        while (set.size() < Config.MAX_NUMERO_SUERTE) {
-            set.add(r.nextInt(49) + 1);
-        }
-        // System.out.println("Random numbers with no duplicates = " + set);
-        return set;
+    public int[] generatorRandom() {
+
     }
 
     /**
@@ -109,6 +102,7 @@ public class JuegoPrimitiva {
      */
 
     public int[] validarNumeros() {
+        int[] numeros = new int[Config.MAX_NUMERO_SUERTE];
         for (int i = 0; i < Config.MAX_NUMERO_SUERTE; i++) {
             do {
                 correct = true;
@@ -139,12 +133,12 @@ public class JuegoPrimitiva {
     private boolean comprobarCategoria(){
         int[]contArrayNum = new int[48];
         int numComprop = 0;
-        for(int i = 0; i < numerosElegidos.getNumerosElegidos().length; i++){
-            numComprop=numerosElegidos.getNumerosElegidos()[i];
+        for(int i = 0; i < numerosElegidosUser.getNumerosElegidos().length; i++){
+            numComprop= numerosElegidosUser.getNumerosElegidos()[i];
             numComprop--;
             contArrayNum[numComprop]++;
         }
-        int complementario = numerosElegidos.getNumeroComp();
+        int complementario = numerosElegidosUser.getNumeroComp();
         if(complementario!=0){
             int posNum = complementario-1;
             contArrayNum[posNum]++;
@@ -182,7 +176,7 @@ public class JuegoPrimitiva {
     private void jugarHastaPremioSR(){
         boolean ganado = false;
         do{
-            numerosElegidos = new Primitiva(generatorRandom());
+            numerosElegidosUser = new Primitiva();
             ganado = comprobarCategoria();
         }while (!ganado);
     }
